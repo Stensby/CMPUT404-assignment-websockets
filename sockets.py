@@ -96,6 +96,8 @@ def read_ws(ws,client):
                 msg_dict = json.loads(msg)
                 for key in msg_dict:
                     myWorld.set(key,msg_dict[key])
+                for client in clients:
+                    client.put(msg)
             else:
                 break
     except:
@@ -113,7 +115,7 @@ def subscribe_socket(ws):
                msg = client.get()
                ws.send(msg)
        except Exception as e:
-           print "WS Error %s" % #!/usr/bin/env python
+           print "WS Error %s" % e
        finally:
            clients.remove(client)
            gevent.kill(event)
