@@ -68,7 +68,7 @@ def set_listener( entity, data ):
     ''' do something with the update ! '''
     update = json.dumps({entity:data})
     for client in clients:
-        client
+        client.put(update)
 
 myWorld.add_set_listener( set_listener )
 
@@ -96,8 +96,6 @@ def read_ws(ws,client):
                 msg_dict = json.loads(msg)
                 for key in msg_dict:
                     myWorld.set(key,msg_dict[key])
-                for client in clients:
-                    client.put(msg)
             else:
                 break
     except:
